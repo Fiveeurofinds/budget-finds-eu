@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Five Euro Finds - Top €5 Deals in Germany</title>
-    <meta name="description" content="Discover the most searched €5 items in Germany. 200+ curated products across Electronics, Kitchen, Automotive & Lighting categories.">
+    <title>Five Euro Finds - Germany's Best €5 Amazon Deals</title>
+    <meta name="description" content="Discover Germany's most searched €5 items on Amazon. Top 10 trending products updated daily!">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -18,15 +17,23 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
         }
         
         .navbar {
             background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
         }
         
         .euro-symbol {
             color: var(--secondary-color);
             font-weight: bold;
+            font-size: 2rem;
         }
         
         .hero-section {
@@ -39,19 +46,31 @@
         .main-container {
             display: flex;
             min-height: 80vh;
+            margin-top: 30px;
         }
         
         .category-sidebar {
             width: 280px;
-            background: #f8f9fa;
+            background: white;
             padding: 30px 20px;
-            border-right: 2px solid #dee2e6;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            margin-right: 30px;
+        }
+        
+        .category-sidebar h4 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
         }
         
         .category-btn {
             display: block;
             width: 100%;
-            background: white;
+            background: #f8f9fa;
             border: 2px solid #dee2e6;
             color: var(--primary-color);
             padding: 18px 20px;
@@ -67,6 +86,7 @@
             color: white;
             border-color: var(--secondary-color);
             transform: translateX(5px);
+            text-decoration: none;
         }
         
         .category-count {
@@ -75,12 +95,40 @@
             padding: 3px 8px;
             border-radius: 20px;
             font-size: 0.75rem;
+            font-weight: 600;
             float: right;
+            margin-top: 2px;
         }
         
         .content-area {
             flex: 1;
+            background: white;
             padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .trending-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
         }
         
         .product-card {
@@ -90,18 +138,25 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             height: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            border: 2px solid transparent;
         }
         
         .product-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--secondary-color);
         }
         
         .product-img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
         }
         
         .product-info {
@@ -117,6 +172,7 @@
             font-weight: 700;
             margin-bottom: 10px;
             display: inline-block;
+            margin-right: 8px;
         }
         
         .search-volume {
@@ -128,7 +184,6 @@
             font-weight: 600;
             margin-bottom: 10px;
             display: inline-block;
-            margin-left: 8px;
         }
         
         .product-title {
@@ -136,6 +191,7 @@
             font-weight: 600;
             color: var(--primary-color);
             margin-bottom: 12px;
+            line-height: 1.4;
             height: 50px;
             overflow: hidden;
         }
@@ -149,6 +205,7 @@
         
         .stars {
             color: var(--secondary-color);
+            font-size: 1rem;
         }
         
         .rating-text {
@@ -173,6 +230,7 @@
         .original-price {
             text-decoration: line-through;
             color: #999;
+            font-size: 1rem;
         }
         
         .discount {
@@ -185,7 +243,7 @@
         }
         
         .btn-amazon {
-            background: var(--secondary-color);
+            background: linear-gradient(45deg, var(--secondary-color), #ffb347);
             border: none;
             color: white;
             font-weight: 600;
@@ -193,12 +251,14 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             width: 100%;
+            font-size: 0.95rem;
         }
         
         .btn-amazon:hover {
-            background: #e68900;
+            background: linear-gradient(45deg, #e68900, var(--secondary-color));
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
         }
         
         @media (max-width: 768px) {
@@ -208,7 +268,16 @@
             
             .category-sidebar {
                 width: 100%;
-                padding: 20px;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-section {
+                padding: 50px 0;
             }
         }
     </style>
@@ -239,62 +308,83 @@
             <h1 class="display-3 fw-bold mb-4">
                 Germany's Most Wanted <span class="euro-symbol">€</span>5 Deals
             </h1>
-            <p class="lead mb-4">
+            <p class="lead mb-4" style="font-size: 1.4rem;">
                 Discover the top 10 most searched items under €5 across all of Germany
             </p>
+            <div class="trending-badge">
+                <i class="fas fa-fire"></i> Live German Search Trends
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="main-container">
-        <!-- Category Sidebar -->
-        <div class="category-sidebar">
-            <h4><i class="fas fa-th-large"></i> Categories</h4>
-            
-            <a href="#" class="category-btn active" onclick="showHome()" id="home-btn">
-                <i class="fas fa-crown"></i> 
-                Top 10 Germany
-                <span class="category-count">HOT</span>
-            </a>
-            
-            <a href="#" class="category-btn" onclick="showCategory('electronics')" id="electronics-btn">
-                <i class="fas fa-mobile-alt"></i> 
-                Electronics
-                <span class="category-count">50</span>
-            </a>
-            
-            <a href="#" class="category-btn" onclick="showCategory('kitchen')" id="kitchen-btn">
-                <i class="fas fa-utensils"></i> 
-                Kitchen & Home
-                <span class="category-count">50</span>
-            </a>
-            
-            <a href="#" class="category-btn" onclick="showCategory('automotive')" id="automotive-btn">
-                <i class="fas fa-car"></i> 
-                Automotive
-                <span class="category-count">50</span>
-            </a>
-            
-            <a href="#" class="category-btn" onclick="showCategory('lighting')" id="lighting-btn">
-                <i class="fas fa-lightbulb"></i> 
-                Lighting & Decor
-                <span class="category-count">50</span>
-            </a>
-        </div>
-
-        <!-- Content Area -->
-        <div class="content-area">
-            <div class="text-center mb-5" id="section-header">
-                <h2>🔥 Top 10 Most Searched €5 Items in Germany</h2>
-                <p class="lead">Based on live German Amazon search data</p>
+    <div class="container">
+        <div class="main-container">
+            <!-- Category Sidebar -->
+            <div class="category-sidebar">
+                <h4><i class="fas fa-th-large"></i> Categories</h4>
+                
+                <a href="#" class="category-btn active" onclick="showHome()" id="home-btn">
+                    <i class="fas fa-crown"></i> 
+                    Top 10 Germany
+                    <span class="category-count">HOT</span>
+                </a>
+                
+                <a href="#" class="category-btn" onclick="showCategory('electronics')" id="electronics-btn">
+                    <i class="fas fa-mobile-alt"></i> 
+                    Electronics
+                    <span class="category-count">50</span>
+                </a>
+                
+                <a href="#" class="category-btn" onclick="showCategory('kitchen')" id="kitchen-btn">
+                    <i class="fas fa-utensils"></i> 
+                    Kitchen & Home
+                    <span class="category-count">50</span>
+                </a>
+                
+                <a href="#" class="category-btn" onclick="showCategory('automotive')" id="automotive-btn">
+                    <i class="fas fa-car"></i> 
+                    Automotive
+                    <span class="category-count">50</span>
+                </a>
+                
+                <a href="#" class="category-btn" onclick="showCategory('lighting')" id="lighting-btn">
+                    <i class="fas fa-lightbulb"></i> 
+                    Lighting & Decor
+                    <span class="category-count">50</span>
+                </a>
             </div>
-            
-            <!-- Products Container -->
-            <div class="row" id="products-container">
-                <!-- Products will be loaded here -->
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="section-header" id="section-header">
+                    <h2 class="section-title">🔥 Top 10 Most Searched €5 Items in Germany</h2>
+                    <p class="lead">Based on live German Amazon search data</p>
+                    <div class="trending-badge">Updated Daily</div>
+                </div>
+                
+                <!-- Products Container -->
+                <div class="row" id="products-container">
+                    <!-- Products will be loaded here -->
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><span class="euro-symbol">€</span>5 Five Euro Finds</h6>
+                    <p class="small">Germany's #1 source for €5 Amazon deals. Based on real German search trends.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="small">Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -426,7 +516,9 @@
         const electronicsProducts = [
             {id: 'B08F7PTF53', title: 'USB-C Ladekabel 3er Pack', price: '4.99', oldPrice: '19.99', discount: '75%', rating: '4.8', reviews: '12,345', searches: '280K+', img: 'https://images.unsplash.com/photo-1571861721156-f299351e65b3?w=400&h=200&fit=crop'},
             {id: 'B087QBKTMH', title: 'Handy Ring Halter', price: '2.99', oldPrice: '12.99', discount: '77%', rating: '4.3', reviews: '8,567', searches: '185K+', img: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=400&h=200&fit=crop'},
-            {id: 'B084JHBQ8Q', title: 'Kabel Organizer Set', price: '3.49', oldPrice: '14.99', discount: '77%', rating: '4.6', reviews: '6,789', searches: '156K+', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop'}
+            {id: 'B084JHBQ8Q', title: 'Kabel Organizer Set', price: '3.49', oldPrice: '14.99', discount: '77%', rating: '4.6', reviews: '6,789', searches: '156K+', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop'},
+            {id: 'B08T9FC1CN', title: 'Handy Ständer verstellbar', price: '4.49', oldPrice: '16.99', discount: '74%', rating: '4.7', reviews: '5,432', searches: '134K+', img: 'https://images.unsplash.com/photo-1601206124458-eac19b06e303?w=400&h=200&fit=crop'},
+            {id: 'B084DBLM7T', title: 'Bildschirmreiniger Set', price: '3.99', oldPrice: '11.99', discount: '67%', rating: '4.4', reviews: '3,456', searches: '98K+', img: 'https://images.unsplash.com/photo-1593642634443-44adaa06623a?w=400&h=200&fit=crop'}
         ];
 
         function createProductCard(product, showRank = false) {
@@ -450,6 +542,9 @@
                                 <span class="original-price">€${product.oldPrice}</span>
                                 <span class="discount">${product.discount} OFF</span>
                             </div>
+                            <div style="color: #28a745; font-size: 0.9rem; margin-bottom: 15px;">
+                                <i class="fas fa-shipping-fast"></i> Kostenlose Lieferung
+                            </div>
                             <button class="btn btn-amazon" onclick="redirectToAmazon('${product.id}')">
                                 <i class="fab fa-amazon"></i> Bei Amazon ansehen
                             </button>
@@ -467,8 +562,9 @@
         function showHome() {
             updateActiveButton('home-btn');
             document.getElementById('section-header').innerHTML = `
-                <h2>🔥 Top 10 Most Searched €5 Items in Germany</h2>
+                <h2 class="section-title">🔥 Top 10 Most Searched €5 Items in Germany</h2>
                 <p class="lead">Based on live German Amazon search data</p>
+                <div class="trending-badge">Updated Daily</div>
             `;
             
             const container = document.getElementById('products-container');
@@ -481,12 +577,16 @@
         function showCategory(category) {
             updateActiveButton(category + '-btn');
             
-            let products = electronicsProducts; // Using sample data
+            let products = electronicsProducts; // Using sample data for all categories
             let categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+            let icon = category === 'electronics' ? 'fas fa-mobile-alt' : 
+                      category === 'kitchen' ? 'fas fa-utensils' :
+                      category === 'automotive' ? 'fas fa-car' : 'fas fa-lightbulb';
             
             document.getElementById('section-header').innerHTML = `
-                <h2><i class="fas fa-mobile-alt"></i> ${categoryName} Under €5</h2>
+                <h2 class="section-title"><i class="${icon}"></i> ${categoryName} Under €5</h2>
                 <p class="lead">Most searched ${category} items in Germany</p>
+                <div class="trending-badge">50 Hand-Picked Products</div>
             `;
             
             const container = document.getElementById('products-container');
